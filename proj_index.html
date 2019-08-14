@@ -1,0 +1,128 @@
+<html>
+	<head>
+		<title>LEarn jQuery</title>
+		<link rel="stylesheet" href="style.css">
+		<link rel="stylesheet" href="css/bootstrap.css">
+		<link rel="stylesheet" href="css/jquery-ui.css">
+		<script src="js/jquery.js"></script>
+		<script src="js/jquery-color.js"></script>
+		<script src="js/jquery-ui.js"></script>
+		<script src="js/bootstrap.js"></script>
+		
+		<script>
+			css_background = 'blue';
+			css_width = '100px;'
+			css_height = '30px';
+			css_border_radius = '0px';
+			
+			function css_func(){
+				css_tag = ".result{background: "+css_background+"; width: "+css_width+"; height: "+css_height+"; border: brown solid 2px; border-radius: "+css_border_radius+"}";
+				$('style').replaceWith('<style>'+css_tag+'</style>');
+				
+				$('#css_coding').text(css_tag);
+			}		
+			
+			$(document).ready(function(){
+				css_func();
+				
+				$('select').change(function(){
+					css_background = $(this).val();
+					css_func();
+				});
+				
+				//Width Changer
+				$('#width_changer').slider({
+					range: 'min',
+					value: 100, // this value should be equal to the css_width
+					min: 50,
+					max: 200,
+					slide: function(event, ui){
+						//This function are for the real time or for the dynamical values
+						css_width = ui.value+"px";
+						css_func();
+					}
+				});
+				
+				//Height Changer
+				$('#height_changer').slider({
+					range: 'min',
+					value: 30,
+					min: 10,
+					max: 50,
+					slide: function(event, ui){
+						//This function are for the real time or for the dynamical values
+						css_height = ui.value+"px";
+						// ui.value is for modifing the value.
+						css_func();
+					}
+				});
+				
+				// Border Radius Changer
+				$('#radius_changer').slider({
+					ranger: 'min',
+					value: 0,
+					min: 0,
+					max: 20,
+					slide: function(event, ui){
+						css_border_radius = ui.value+"px";
+						css_func();
+					}
+				});
+				
+				//Getting CSS in the dialog Box
+				$('#get_css').click(function(){
+					$('#css_coding').dialog({
+						"title": "The Style"
+					});
+				});
+				
+			});
+		</script>
+	
+		<style>
+			
+		</style>
+	</head>
+	
+	<body>
+		
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 blocks" style="background-color: gray;">
+					<div class="form-group">
+						<label>Select Any Color: </label>
+						<select class="form-control">
+							<option value="blue">Blue</option>
+							<option value="red">Red</option>
+							<option value="orange">Orange</option>
+							<option value="black">Black</option>
+							<option value="gray">Gray</option>
+							<option value="yellow">Yellow</option>
+							<option value="purple">Purple</option>
+						</select>
+					</div>
+					<div class="form-group">
+						<label>Width Changer</label>
+						<div id="width_changer"></div>
+					</div>
+					<div class="form-group">
+						<label>Height Changer</label>
+						<div id="height_changer"></div>
+					</div>
+					<div>
+						<label>Border Radius Changer</label>
+						<div id="radius_changer"></div>
+					</div>
+				</div>
+				<div class="col-md-6 blocks">
+					<div class="result"></div>
+					<div id="css_coding"></div>
+					<br><br><br><br>
+					<button class="btn btn-danger" id="get_css">Get CSS</button>
+				</div>
+			
+			</div>
+		</div>
+
+	</body>
+</html>
